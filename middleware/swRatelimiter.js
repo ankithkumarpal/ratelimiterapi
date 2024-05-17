@@ -22,7 +22,7 @@ const allowRequest = async (req, res, next) => {
             res.status(200).json({ message : 'Rate limit exceeded' , timetowait :  process.env.WINDOW_SIZE , error : true});
         }
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error });
     }
 };
 
