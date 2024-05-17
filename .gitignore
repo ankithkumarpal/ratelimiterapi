@@ -1,0 +1,47 @@
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm/
+
+# Environment configuration
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Logs and testing
+logs/
+*.log
+npm-debug.log*
+
+# Build files
+build/
+dist/
+out/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Typescript
+*.tsbuildinfo
+*.ts
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# .vscode folder settings
+.vscode/
