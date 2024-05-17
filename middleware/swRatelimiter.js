@@ -4,7 +4,8 @@ const SlidingWindow = require("../models/swModel");
 // Rate limiting middleware
 const allowRequest = async (req, res, next) => {
     const now = Date.now();
-    const cutoffTime = new Date(now -  process.env.WINDOW_SIZE);
+    const cutoffTime = now -  process.env.WINDOW_SIZE;
+    console.log(cutoffTime);
 
     try {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });

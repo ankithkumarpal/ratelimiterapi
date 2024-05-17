@@ -20,6 +20,7 @@ const checkTokens = async (req, res, next) => {
 
         const now = Date.now();
         const timePassed = now - bucket.lastLeakTime;
+        console.log(timePassed)
 
         // Calculate tokens to add based on the leak rate (e.g., 1 token per 10 seconds)
         const tokensToAdd = Math.floor(timePassed / 10000); // 1 token per 10 seconds
@@ -50,7 +51,7 @@ const checkTokens = async (req, res, next) => {
             res.status(200).json({ message : 'Rate limit exceeded' , timetowait :  process.env.WINDOW_SIZE , error : true});
         }
     } catch (error) {
-        res.status(500).json({ message : 'Internal server error' , timetowait :  process.env.WINDOW_SIZE , error : true});
+        res.status(500).json({ message : error , timetowait :  process.env.WINDOW_SIZE , error : true});
     }
 };
 
