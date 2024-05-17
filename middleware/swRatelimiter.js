@@ -11,8 +11,7 @@ const allowRequest = async (req, res, next) => {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
         
         const newRequest = new SlidingWindow({
-            timestamp: now , 
-            expires: process.env.WINDOW_SIZE / 1000
+            timestamp: now
         })
 
         await newRequest.save();
