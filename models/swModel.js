@@ -5,7 +5,7 @@ const RequestSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
-        expires: (process.env.WINDOW_SIZE ? process.env.WINDOW_SIZE / 1000 : DEFAULT_EXPIRES)
+        // expires: (process.env.WINDOW_SIZE ? process.env.WINDOW_SIZE / 1000 : DEFAULT_EXPIRES)
     }
 });
 
