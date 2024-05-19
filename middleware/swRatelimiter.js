@@ -6,8 +6,9 @@ const allowRequest = async (req, res, next) => {
     const now = Date.now();
     const cutoffTime = now -  process.env.WINDOW_SIZE;
 
-    res.status(200).json({ message : cutoffTime , timetowait :  process.env.WINDOW_SIZE , error : true});
-    next();
+    res.status(200).json({ message : "reached in sliding window request" , timetowait :  process.env.WINDOW_SIZE , error : true});
+    // next();
+    return ;
 
     try {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
