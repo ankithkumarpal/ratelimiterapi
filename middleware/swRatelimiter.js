@@ -7,7 +7,7 @@ const allowRequest = async (req, res, next) => {
     const cutoffTime = now - 10000;
 
     try {
-        const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
+        // const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
         
         res.status(200).json({message : count , error : false , timetowait : "returng count"})
         // return ;
