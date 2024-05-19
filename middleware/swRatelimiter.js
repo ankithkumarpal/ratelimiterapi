@@ -5,10 +5,6 @@ const SlidingWindow = require("../models/swModel");
 const allowRequest = async (req, res, next) => {
     const now = Date.now();
     const cutoffTime = now - 10000;
-   
-    // res.status(200).json({ message : "reached in sliding window request" , timetowait :  10000, error : true});
-    // next();
-    // return ;
 
     try {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
@@ -19,7 +15,7 @@ const allowRequest = async (req, res, next) => {
 
         await newRequest.save();
 
-        if (count < process.env.LIMIT) {
+        if (count < 5) {
             next();
         } else {
             res.status(200).json({ message : 'Rate limit exceeded' , timetowait : 10000 , error : true});
