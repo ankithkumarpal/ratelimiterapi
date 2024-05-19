@@ -5,7 +5,9 @@ const SlidingWindow = require("../models/swModel");
 const allowRequest = async (req, res, next) => {
     const now = Date.now();
     const cutoffTime = now -  process.env.WINDOW_SIZE;
-    console.log(cutoffTime);
+
+    res.status(200).json({ message : cutoffTime , timetowait :  process.env.WINDOW_SIZE , error : true});
+    next();
 
     try {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
