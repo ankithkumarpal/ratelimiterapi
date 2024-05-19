@@ -11,7 +11,7 @@ const allowRequest = async (req, res, next) => {
         
         res.status(200).json({timetowait : "returng count"})
         // return ;
-        // const newRequest = new SlidingWindow({
+        // const newRequest = new SlidingWindow({s
         //     timestamp: now
         // })
 

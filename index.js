@@ -16,7 +16,7 @@ dotenv.config(); // Load environment variables from .env file
 
 app.use(cors());
 // CONNECT TO MONGO
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect("mongodb+srv://ankithpal:ankithpal@cluster0.q9ppzlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
