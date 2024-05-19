@@ -14,10 +14,9 @@ const allowRequest = async (req, res, next) => {
             timestamp: { $gte: cutoffTime } 
         });
 
-        // Save the request data to the database
         const newRequest = new SlidingWindow({
             ipAddress: ipAddress,
-            timestamp: now
+            timestamp: new Date(now)
         });
         await newRequest.save();
 
@@ -25,7 +24,7 @@ const allowRequest = async (req, res, next) => {
             next();
         } else {
             // Rate limit exceeded
-            res.status(429).json({ 
+            res.status(200).json({ 
                 message: 'Rate limit exceeded for Ip' + ipAddress, 
                 timetowait: process.env.TIMETOWAIT, 
                 error: true 

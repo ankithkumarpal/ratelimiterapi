@@ -1,4 +1,3 @@
-const DEFAULT_EXPIRES = 10;
 const mongoose = require('mongoose');
 
 const RequestSchema = new mongoose.Schema({
@@ -7,8 +6,7 @@ const RequestSchema = new mongoose.Schema({
         required: true
     },
     timestamp: {
-        type: Date,
-        expires: 10
+        type: Date
     }
 });
 
