@@ -4,6 +4,9 @@ node_modules/
 # Optional npm cache directory
 .npm/
 
+# Environment configuration
+.env
+
 # IDE and editor files
 .vscode/
 .idea/

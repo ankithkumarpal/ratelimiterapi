@@ -2,9 +2,14 @@ const DEFAULT_EXPIRES = 10;
 const mongoose = require('mongoose');
 
 const RequestSchema = new mongoose.Schema({
+    ipAddress: {
+        type: String,
+        required: true
+    },
     timestamp: {
-        type: Date
-        // expires: (process.env.WINDOW_SIZE ? process.env.WINDOW_SIZE / 1000 : DEFAULT_EXPIRES)
+        type: Date,
+        default: Date.now,
+        expires: (process.env.WINDOW_SIZE ? process.env.WINDOW_SIZE / 1000 : DEFAULT_EXPIRES)
     }
 });
 

@@ -1,26 +1,38 @@
-
 const SlidingWindow = require("../models/swModel");
 
 // Rate limiting middleware
 const allowRequest = async (req, res, next) => {
     const now = Date.now();
-    const cutoffTime = now - 10000;
+    const cutoffTime = now - process.env.WINDOW_SIZE;
 
     try {
-        const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
-        const newRequest = new SlidingWindow({
-            timestamp: now
-        })
+        const ipAddress = req.ip; // Retrieve client's IP address
 
+        // Count documents within the window for the specific IP address
+        const count = await SlidingWindow.countDocuments({ 
+            ipAddress: ipAddress,
+            timestamp: { $gte: cutoffTime } 
+        });
+
+        // Save the request data to the database
+        const newRequest = new SlidingWindow({
+            ipAddress: ipAddress,
+            timestamp: now
+        });
         await newRequest.save();
 
-        if (count < 5) {
+        if (count < process.env.Limit) {
             next();
         } else {
-            res.status(200).json({ message : 'Rate limit exceeded' , timetowait : 10000 , error : true});
+            // Rate limit exceeded
+            res.status(429).json({ 
+                message: 'Rate limit exceeded for Ip' + ipAddress, 
+                timetowait: process.env.TIMETOWAIT, 
+                error: true 
+            });
         }
     } catch (error) {
-        res.status(500).json({ error: error , message : "In catch statement" });
+        res.status(500).json({ error: error });
     }
 };
 

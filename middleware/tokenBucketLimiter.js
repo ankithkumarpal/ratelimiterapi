@@ -35,7 +35,7 @@ const tokenBucketMiddleware = async (req, res, next) => {
             await entry.save(); 
             next(); 
         } else {
-            res.status(200).json({ message : 'Rate limit exceeded' , timetowait :  process.env.WINDOW_SIZE , error : true});
+            res.status(200).json({ message : 'Rate limit exceeded for IP : ' + req.ip  , timetowait :  process.env.TIMETOWAIT , error : true});
         }
     } catch (error) {
         res.status(500).json({ error: error });
