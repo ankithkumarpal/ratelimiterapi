@@ -6,7 +6,7 @@ const allowRequest = async (req, res, next) => {
     const cutoffTime = now - process.env.WINDOW_SIZE;
 
     try {
-        const ipAddress = req.ip; // Retrieve client's IP address
+        const ipAddress = req.ip;
 
         // Count documents within the window for the specific IP address
         const count = await SlidingWindow.countDocuments({ 
