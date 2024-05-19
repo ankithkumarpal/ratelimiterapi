@@ -10,17 +10,18 @@ const allowRequest = async (req, res, next) => {
         const count = await SlidingWindow.countDocuments({ timestamp: { $gte: cutoffTime } });
         
         res.status(200).json({message : count , error : false , timetowait : "returng count"})
-        const newRequest = new SlidingWindow({
-            timestamp: now
-        })
+        // return ;
+        // const newRequest = new SlidingWindow({
+        //     timestamp: now
+        // })
 
-        await newRequest.save();
+        // await newRequest.save();
 
-        if (count < 5) {
-            next();
-        } else {
-            res.status(200).json({ message : 'Rate limit exceeded' , timetowait : 10000 , error : true});
-        }
+        // if (count < 5) {
+        //     next();
+        // } else {
+        //     res.status(200).json({ message : 'Rate limit exceeded' , timetowait : 10000 , error : true});
+        // }
     } catch (error) {
         res.status(500).json({ error: error , message : "In catch statement" });
     }
